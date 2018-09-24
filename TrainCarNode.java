@@ -16,6 +16,12 @@ public class TrainCarNode{
 	prevNode = null;
     }
 
+    public TrainCarNode(TrainCar newNode, TrainCar nextNode, TrainCar prevNode){
+	currNode = newNode;
+	nextNode = nextNode;
+	prevNode = prevNode;
+    }
+
     public TrainCar getCurrNode(){
 	return currNode;
     }
