@@ -16,7 +16,7 @@ public class TrainCarNode{
 	prevNode = null;
     }
 
-    public TrainCarNode(TrainCar newNode, TrainCar nextNode, TrainCar prevNode){
+    public TrainCarNode(TrainCar newNode, TrainCarNode nextNode, TrainCarNode prevNode){
 	currNode = newNode;
 	nextNode = nextNode;
 	prevNode = prevNode;
@@ -32,22 +32,22 @@ public class TrainCarNode{
 	return oldCurrNode;
     }
     
-    public TrainCar getNextNode(){
+    public TrainCarNode getNextNode(){
 	return nextNode;
     }
 
-    public TrainCar setNextNode(TrainCar newNode){
-	TrainCar oldNextNode = nextNode;
+    public TrainCarNode setNextNode(TrainCarNode newNode){
+	TrainCarNode oldNextNode = nextNode;
 	nextNode = newNode;
 	return oldNextNode;
     }
 
-    public TrainCar getPrevNode(){
+    public TrainCarNode getPrevNode(){
 	return prevNode;
     }
     
-    public TrainCar setPrevNode(TrainCar newNode){
-	TrainCar oldPrevNode = newNode;
+    public TrainCarNode setPrevNode(TrainCarNode newNode){
+	TrainCarNode oldPrevNode = prevNode;
 	prevNode = newNode;
 	return oldPrevNode;
     }
@@ -55,7 +55,7 @@ public class TrainCarNode{
     public String toString(){
 	String output = "";
 	output += "\nCurrent Node: " + currNode;
-	output += "\nNext Node: " + nextnode;
+	output += "\nNext Node: " + nextNode;
 	output += "\nPrev Node: " + prevNode + "\n";
 	return output;
     }
