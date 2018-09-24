@@ -1,8 +1,8 @@
 public class TrainCarNode{
 
     TrainCar currNode;
-    TrainCar nextNode;
-    TrainCar prevNode;
+    TrainCarNode nextNode;
+    TrainCarNode prevNode;
 
     public TrainCarNode(){
 	currNode = null;
