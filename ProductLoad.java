@@ -3,20 +3,20 @@ public class ProductLoad{
     String name;
     double weight;
     double value;
-    boolean dangerLevel;
+    boolean isDangerous;
 
     public ProductLoad(){
 	name = "";
 	weight = 0.0;
 	value = 0.0;
-	dangerLevel = false;
+	isDangerous = false;
     }
 
-    public ProductLoad(String newName, double newWeight, double newValue, boolean newdangerLevel){
+    public ProductLoad(String newName, double newWeight, double newValue, boolean newdangerState){
 	name = newName;
 	weight = newWeight;
 	value = newValue;
-	dangerLevel = newdangerLevel;
+	isDangerous = newdangerState;
     }
 
     public String getName(){
@@ -51,13 +51,13 @@ public class ProductLoad{
 	return oldValue;
     }
 
-    public boolean getDangerLevel(){
-	return dangerLevel;
+    public boolean getDangerState(){
+	return isDangerous;
     }
 
-    public boolean setDangerLevel(boolean newDangerLevel){
-	boolean oldDangerLevel = dangerLevel;
-	dangerLevel = newDangerLevel;
-	return oldDangerLevel;
+    public boolean setDangerState(boolean newDangerState){
+	boolean oldDangerState = isDangerous;
+	isDangerous = newDangerState;
+	return oldDangerState;
     }
 }
