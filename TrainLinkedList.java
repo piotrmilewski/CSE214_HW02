@@ -39,15 +39,24 @@ public class TrainLinkedList{
 	cursor = cursor.getPrevNode();
     }
 
+    /*
+      UNFINISHED LAST WORKED ON THIS
+    */
     public void insertAfterCursor(TrainCar newCar){
-	/*
-	  add base cases
-	*/
-
 	TrainCarNode newNode = TrainCarNode(newCar);
-	newCar.setNextNode(cursor.getNextNode);
-	cursor.setNextNode(newCar);
-	cursor = cursor.getNextNode();
+	if (head == null){
+	    head = newNode;
+	    tail = newNode;
+	    cursor = newNode;
+	}
+	else if (cursor == tail){
+	    
+	}
+	else{
+	    newNode.setNextNode(cursor.getNextNode);
+	    cursor.setNextNode(newCar);
+	    cursor = newNode;
+	}
 	//set TrainLinkedList attributes
 	size++;
 	totalLength += newCar.getLength();
@@ -58,6 +67,9 @@ public class TrainLinkedList{
 		isDangerous = true;
 	}
     }
+    /*
+      UNFINISHED LAST WORKED ON THIS
+    */
 
     public TrainCar removeCursor(){
 	TrainCar removedCar = cursor.getCurrNode(); //stores removed Node
