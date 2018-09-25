@@ -44,22 +44,26 @@ public class TrainManager{
 		train.cursorBackward();
 	    }
 	    else if (input.equals("I")){ //INSERT CAR AFTER CURSOR
-		/*
-		  try catch block here
-		*/
-		prompt = "\nEnter a car length in meters: ";
-		System.out.print(prompt);
-		carLength = Double.parseDouble(stdin.readLine());
+		try{
+		    prompt = "\nEnter a car length in meters: ";
+		    System.out.print(prompt);
+		    carLength = Double.parseDouble(stdin.readLine());
 
-		prompt = "Enter a car weight in tons: ";
-		System.out.print(prompt);
-		carWeight = Double.parseDouble(stdin.readLine());
+		    prompt = "Enter a car weight in tons: ";
+		    System.out.print(prompt);
+		    carWeight = Double.parseDouble(stdin.readLine());
 
-		newCar = new TrainCar(carLength, carWeight);
-		train.insertAfterCursor(newCar);
+		    newCar = new TrainCar(carLength, carWeight);
+		    train.insertAfterCursor(newCar);
 		
-		prompt = "\nNew train car " + carLength + " meters " + carWeight + " tons inserted into train";
-		System.out.println(prompt);
+		    prompt = "\nNew train car " + carLength + " meters " + carWeight + " tons inserted into train";
+		    System.out.println(prompt);
+		}
+		catch (Exception e){
+		    prompt = "\nInvalid input detected.\nPlease make sure you are entering a Double";
+		    prompt += " for the car length and a Double for the car weight.";
+		    System.out.println(prompt);
+		}
 	    }
 	    else if (input.equals("R")){ //REMOVE CAR AT CURSOR
 		train.removeCursor();
@@ -69,41 +73,43 @@ public class TrainManager{
 		    System.out.println("\nCan't set product load without any cars");
 		}
 		else{
-		    /*
-		      try catch block here
-		    */
-		    prompt = "\nEnter produce name: ";
-		    System.out.print(prompt);
-		    produceName = stdin.readLine();
+		    try{
+			prompt = "\nEnter produce name: ";
+			System.out.print(prompt);
+			produceName = stdin.readLine();
 
-		    prompt = "Enter product weight in tons: ";
-		    System.out.print(prompt);
-		    produceWeight = Double.parseDouble(stdin.readLine());
+			prompt = "Enter product weight in tons: ";
+			System.out.print(prompt);
+			produceWeight = Double.parseDouble(stdin.readLine());
 
-		    prompt = "Enter product value in dollars: ";
-		    System.out.print(prompt);
-		    produceValue = Double.parseDouble(stdin.readLine());
+			prompt = "Enter product value in dollars: ";
+			System.out.print(prompt);
+			produceValue = Double.parseDouble(stdin.readLine());
 
-		    prompt = "Enter is product dangerous? (y/n): ";
-		    System.out.print(prompt);
-		    input = stdin.readLine();
-		    if (input.equals("y"))
-			isDangerous = true;
-		    else if (input.equals("n"))
-			isDangerous = false;
+			prompt = "Enter is product dangerous? (y/n): ";
+			System.out.print(prompt);
+			input = stdin.readLine();
+			if (input.equals("y"))
+			    isDangerous = true;
+			else if (input.equals("n"))
+			    isDangerous = false;
 		
-		    newLoad = new ProductLoad(produceName, produceWeight, produceValue, isDangerous);
-		    newCar = new TrainCar(0.0, 0.0, newLoad);
-		    train.setCursorData(newCar);
+			newLoad = new ProductLoad(produceName, produceWeight, produceValue, isDangerous);
+			newCar = new TrainCar(0.0, 0.0, newLoad);
+			train.setCursorData(newCar);
 		
-		    prompt = "\n" + produceWeight + " tons of " + produceName + " added to the current car.";
-		    System.out.println(prompt);
+			prompt = "\n" + produceWeight + " tons of " + produceName + " added to the current car.";
+			System.out.println(prompt);
+		    }
+		    catch (Exception e){
+			prompt = "\nInvalid input detected.\nPlease make sure your are entering a ";
+			prompt += "Double for the product weight, a Double for the product value, ";
+			prompt += "and the character 'y' or 'n' for if the product is dangerous";
+			System.out.println(prompt);
+		    }
 		}
 	    }
 	    else if (input.equals("S")){ //SEARCH FOR PRODUCT
-		/*
-		  try catch block here
-		*/
 		prompt = "\nEnter product name: ";
 		System.out.print(prompt);
 		input = stdin.readLine();
