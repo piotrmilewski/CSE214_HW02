@@ -10,6 +10,12 @@ public class TrainCar{
 	load = null;
     }
 
+    public TrainCar(double newLength, double newWeight){
+	length = newLength;
+	weight = newWeight;
+	load = null;
+    }
+    
     public TrainCar(double newLength, double newWeight, ProductLoad newLoad){
 	length = newLength;
 	weight = newWeight;
