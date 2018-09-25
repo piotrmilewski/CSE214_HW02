@@ -185,7 +185,7 @@ public class TrainLinkedList{
 	ProductLoad currLoad;
 	while (innerCursor != null){
 	    currLoad = innerCursor.getCurrNode().getLoad();
-	    if (name.equals(currLoad.getName())){
+	    if (currLoad != null && name.equals(currLoad.getName())){
 		sumOfWeight += currLoad.getWeight();
 		sumOfValue += currLoad.getValue();
 		numOfCars++;
