@@ -1,3 +1,12 @@
+/**
+ * The <code>TrainCar</code> class stores a <code>ProductLoad</code> instance and its own attributes.
+ *
+ *
+ * @author Piotr Milewski
+ *    email: piotr.milewski@stonybrook.edu
+ *    Stony Brook ID: 112291666
+ **/
+
 public class TrainCar{
 
     double length;

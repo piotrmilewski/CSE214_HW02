@@ -1,3 +1,14 @@
+/**
+ * The <code>TrainManager</code> class executes an interactive train manager in the terminal
+ * utilizing the <code>TrainLinkedList</code> class to store each train and information pertaining
+ * to each train car.
+ *
+ *
+ * @author Piotr Milewski
+ *    email: piotr.milewski@stonybrook.edu
+ *    Stony Brook ID: 112291666
+ **/
+
 import java.io.*;
 
 public class TrainManager{
@@ -15,7 +26,9 @@ public class TrainManager{
 	String input, prompt, produceName;
 	double carLength, carWeight, produceWeight, produceValue;
 	boolean isDangerous = false;
+	boolean innerLoop = false;
 	while (running){
+	    innerLoop = false;
 	    prompt = "\n(F) Cursor Forward \n(B) Cursor Backward \n(I) Insert Car After Cursor \n";
 	    prompt += "(R) Remove Car At Cursor \n(L) Set Product Load \n(S) Search For Product \n";
 	    prompt += "(T) Display Train \n(M) Display Manifest \n(D) Remove Dangerous Cars \n(Q) Quit \n\n";
@@ -31,6 +44,9 @@ public class TrainManager{
 		train.cursorBackward();
 	    }
 	    else if (input.equals("I")){ //INSERT CAR AFTER CURSOR
+		/*
+		  try catch block here
+		*/
 		prompt = "\nEnter a car length in meters: ";
 		System.out.print(prompt);
 		carLength = Double.parseDouble(stdin.readLine());
@@ -52,7 +68,10 @@ public class TrainManager{
 		if (train.getCursorData() == null){
 		    System.out.println("\nCan't set product load without any cars");
 		}
-		else{		
+		else{
+		    /*
+		      try catch block here
+		    */
 		    prompt = "\nEnter produce name: ";
 		    System.out.print(prompt);
 		    produceName = stdin.readLine();
@@ -82,6 +101,9 @@ public class TrainManager{
 		}
 	    }
 	    else if (input.equals("S")){ //SEARCH FOR PRODUCT
+		/*
+		  try catch block here
+		*/
 		prompt = "\nEnter product name: ";
 		System.out.print(prompt);
 		input = stdin.readLine();
@@ -98,7 +120,7 @@ public class TrainManager{
 		train.removeDangerousCars();
 	    }
 	    else if (input.equals("Q")){ //QUIT
-		prompt = "\nProgram terminating successfully...";
+		prompt = "\nProgram terminating successfully...\n";
 		System.out.println(prompt);
 		running = false;
 	    }

@@ -1,3 +1,12 @@
+/**
+ * The <code>ProductLoad</code> class stores information about the TrainCar's load
+ *
+ *
+ * @author Piotr Milewski
+ *    email: piotr.milewski@stonybrook.edu
+ *    Stony Brook ID: 112291666
+ **/
+
 public class ProductLoad{
 
     String name;

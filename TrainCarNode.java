@@ -1,3 +1,13 @@
+/**
+ * The <code>TrainCarNode</code> class contains a node with references to the nodes before 
+ * and after the current node.
+ *
+ *
+ * @author Piotr Milewski
+ *    email: piotr.milewski@stonybrook.edu
+ *    Stony Brook ID: 112291666
+ **/
+
 public class TrainCarNode{
 
     TrainCar currNode;

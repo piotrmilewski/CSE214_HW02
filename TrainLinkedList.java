@@ -1,3 +1,13 @@
+/**
+ * The <code>TrainLinkedList</code> class implements a doubly linked list using the
+ * <code>TrainCarNode</code> class as nodes
+ *
+ *
+ * @author Piotr Milewski
+ *    email: piotr.milewski@stonybrook.edu
+ *    Stony Brook ID: 112291666
+ **/
+
 public class TrainLinkedList{
 
     TrainCarNode head, tail, cursor;
@@ -329,7 +339,6 @@ public class TrainLinkedList{
 	else{
 	    output += "not dangerous.";
 	}
-	System.out.println(numOfDangerousCars);
 	return output;
     }
 }
