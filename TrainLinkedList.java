@@ -1,7 +1,8 @@
 public class TrainLinkedList{
 
     TrainCarNode head, tail, cursor;
-    int size, numOfDangerousCars;
+    int size;
+    int numOfDangerousCars = 0;
     int cursorSpot = 0;
     double totalLength, totalValue, totalWeight;
     boolean isDangerous;
@@ -21,26 +22,50 @@ public class TrainLinkedList{
     }
 
     public TrainCar getCursorData(){
+	if (cursor == null)
+	    return null;
 	return cursor.getCurrNode();
     }
 
     public void setCursorData(TrainCar car){
 	cursor.getCurrNode().setLoad(car.getLoad());
-	if (car.getLoad().getDangerState())
-	    numOfDangerousCars++;
+	//set TrainLinkedList attributes
+	if (car.getLoad() != null){
+	    totalValue += car.getLoad().getValue();
+	    totalWeight += car.getLoad().getWeight();
+	    if (car.getLoad().getDangerState()){ //if new car is dangerous
+		numOfDangerousCars++;
+		if (numOfDangerousCars > 0)
+		    isDangerous = true;
+	    }
+	}
     }
 
     public void cursorForward(){
+	if (cursor == null){
+	    System.out.println("\nTrain is currently empty, cannot move forward");
+	    return;
+	}
 	if (cursor.getNextNode() != null){
 	    cursor = cursor.getNextNode();
 	    cursorSpot++;
 	}
+	else{
+	    System.out.println("\nNo next car, cannot move cursor forward");
+	}
     }
 
     public void cursorBackward(){
+	if (cursor == null){
+	    System.out.println("\nTrain is currently empty, cannot move backward");
+	    return;
+	}
 	if (cursor.getPrevNode() != null){
 	    cursor = cursor.getPrevNode();
 	    cursorSpot--;
+	}
+	else{
+	    System.out.println("\nNo previous car, cannot move cursor backward");
 	}
     }
     
@@ -70,8 +95,10 @@ public class TrainLinkedList{
 	//set TrainLinkedList attributes
 	size++;
 	totalLength += newCar.getLength();
+	totalWeight += newCar.getWeight();
 	if (newCar.getLoad() != null){
 	    totalValue += newCar.getLoad().getValue();
+	    totalWeight += newCar.getLoad().getWeight();
 	    if (newCar.getLoad().getDangerState()){ //if new car is dangerous
 		numOfDangerousCars++;
 		if (numOfDangerousCars > 0)
@@ -81,18 +108,44 @@ public class TrainLinkedList{
     }
 
     public TrainCar removeCursor(){
+	if (cursor == null){
+	    System.out.println("\nThere are no cars to remove");
+	    return null;
+	}
 	TrainCar removedCar = cursor.getCurrNode(); //stores removed Node
-	cursor.getNextNode().setPrevNode(cursor.getPrevNode());
-	cursor = cursor.getPrevNode();
-	cursor.setNextNode(cursor.getNextNode().getNextNode()); //removes cursor's original node
-	if (cursor.getNextNode() != null)
-	    cursor = cursor.getNextNode();
-	cursorSpot--;
+	if (cursor == head){
+	    if (cursor.getNextNode() != null){
+		head = cursor.getNextNode();
+		cursor.getNextNode().setPrevNode(null);
+		cursor = head;
+	    }
+	    else{
+		head = null;
+		cursor = null;
+		tail = null;
+		cursorSpot--;
+	    }
+	}
+	else if (cursor == tail){
+	    tail = cursor.getPrevNode();
+	    cursor.getPrevNode().setNextNode(null);
+	    cursor = tail;
+	    cursorSpot--;
+	}
+	else{
+	    cursor.getNextNode().setPrevNode(cursor.getPrevNode());
+	    cursor = cursor.getPrevNode();
+	    cursor.setNextNode(cursor.getNextNode().getNextNode()); //removes cursor's original node
+	    if (cursor.getNextNode() != null)
+		cursor = cursor.getNextNode();
+	}
 	//set TrainLinkedList attributes
 	size--;
 	totalLength -= removedCar.getLength();
+	totalWeight -= removedCar.getWeight();
 	if (removedCar.getLoad() != null){
 	    totalValue -= removedCar.getLoad().getValue();
+	    totalWeight -= removedCar.getLoad().getWeight();
 	    if (removedCar.getLoad().getDangerState()){ //if removed car was dangerous
 		numOfDangerousCars--;
 		if (numOfDangerousCars == 0)
@@ -140,6 +193,10 @@ public class TrainLinkedList{
 		    carDangerous = true;
 	    }
 	    innerCursor = innerCursor.getNextNode();
+	}
+	if (numOfCars == 0){
+	    System.out.println("\nNo record of " + name + " on board train.");
+	    return;
 	}
 	if (carDangerous)
 	    dangerString = "YES";
@@ -204,19 +261,59 @@ public class TrainLinkedList{
 	    System.out.println("\nThere are no dangerous cars");
 	    return;
 	}
+	TrainCar removedCar;
 	TrainCarNode innerCursor = head;
 	ProductLoad currLoad;
 	while (innerCursor != null && numOfDangerousCars > 0){
 	    currLoad = innerCursor.getCurrNode().getLoad();
 	    if (currLoad != null && currLoad.getDangerState()){
-		if (innerCursor.getNextNode() != null)
+		removedCar = innerCursor.getCurrNode();
+		if (innerCursor == head){
+		    if (innerCursor.getNextNode() != null){
+			head = innerCursor.getNextNode();
+			innerCursor.getNextNode().setPrevNode(null);
+			cursor = head;
+		    }
+		    else{
+			head = null;
+			cursor = null;
+			tail = null;
+		    }
+		}
+		else if (innerCursor == tail){
+		    tail = innerCursor.getPrevNode();
+		    innerCursor.getPrevNode().setNextNode(null);
+		}
+		else{
 		    innerCursor.getNextNode().setPrevNode(innerCursor.getPrevNode());
-		innerCursor = innerCursor.getPrevNode();
-		innerCursor.setNextNode(innerCursor.getNextNode().getNextNode());
-		numOfDangerousCars--;
+		    innerCursor = innerCursor.getPrevNode();
+		    innerCursor.setNextNode(innerCursor.getNextNode().getNextNode());
+		}
+		//set TrainLinkedList attributes
+		size--;
+		totalLength -= removedCar.getLength();
+		totalWeight -= removedCar.getWeight();
+		if (removedCar.getLoad() != null){
+		    totalValue -= removedCar.getLoad().getValue();
+		    totalWeight -= removedCar.getLoad().getWeight();
+		    if (removedCar.getLoad().getDangerState()){ //if removed car was dangerous
+			numOfDangerousCars--;
+			if (numOfDangerousCars == 0)
+			    isDangerous = false;
+		    }
+		}
+		if (head != null){
+		    cursor = head;
+		    cursorSpot = 1;
+		}
+		else{
+		    cursor = null;
+		    cursorSpot = 0;
+		}
 	    }
 	    innerCursor = innerCursor.getNextNode();
 	}
+	
 	System.out.println("\nDangerous cars successfully removed from the train.");
     }
     
@@ -227,11 +324,12 @@ public class TrainLinkedList{
 	output += totalWeight + " tons, ";
 	output += totalValue + " dollars, ";
 	if (isDangerous){
-	    output += "DANGEROUS.\n";
+	    output += "DANGEROUS.";
 	}
 	else{
-	    output += "not dangerous.\n";
+	    output += "not dangerous.";
 	}
+	System.out.println(numOfDangerousCars);
 	return output;
     }
 }

@@ -49,32 +49,37 @@ public class TrainManager{
 		train.removeCursor();
 	    }
 	    else if (input.equals("L")){ //SET PRODUCT LOAD
-		prompt = "\nEnter produce name: ";
-		System.out.print(prompt);
-		produceName = stdin.readLine();
+		if (train.getCursorData() == null){
+		    System.out.println("\nCan't set product load without any cars");
+		}
+		else{		
+		    prompt = "\nEnter produce name: ";
+		    System.out.print(prompt);
+		    produceName = stdin.readLine();
 
-		prompt = "Enter product weight in tons: ";
-		System.out.print(prompt);
-		produceWeight = Double.parseDouble(stdin.readLine());
+		    prompt = "Enter product weight in tons: ";
+		    System.out.print(prompt);
+		    produceWeight = Double.parseDouble(stdin.readLine());
 
-		prompt = "Enter product value in dollars: ";
-		System.out.print(prompt);
-		produceValue = Double.parseDouble(stdin.readLine());
+		    prompt = "Enter product value in dollars: ";
+		    System.out.print(prompt);
+		    produceValue = Double.parseDouble(stdin.readLine());
 
-		prompt = "Enter is product dangerous? (y/n): ";
-		System.out.print(prompt);
-		input = stdin.readLine();
-		if (input.equals("y"))
-		    isDangerous = true;
-		else if (input.equals("n"))
-		    isDangerous = false;
-
-		newLoad = new ProductLoad(produceName, produceWeight, produceValue, isDangerous);
-		newCar = new TrainCar(0.0, 0.0, newLoad);
-		train.setCursorData(newCar);
+		    prompt = "Enter is product dangerous? (y/n): ";
+		    System.out.print(prompt);
+		    input = stdin.readLine();
+		    if (input.equals("y"))
+			isDangerous = true;
+		    else if (input.equals("n"))
+			isDangerous = false;
 		
-		prompt = "\n" + produceWeight + " tons of " + produceName + " added to the current car.";
-		System.out.println(prompt);		
+		    newLoad = new ProductLoad(produceName, produceWeight, produceValue, isDangerous);
+		    newCar = new TrainCar(0.0, 0.0, newLoad);
+		    train.setCursorData(newCar);
+		
+		    prompt = "\n" + produceWeight + " tons of " + produceName + " added to the current car.";
+		    System.out.println(prompt);
+		}
 	    }
 	    else if (input.equals("S")){ //SEARCH FOR PRODUCT
 		prompt = "\nEnter product name: ";
