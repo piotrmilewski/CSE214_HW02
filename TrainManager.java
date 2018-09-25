@@ -64,9 +64,9 @@ public class TrainManager{
 		prompt = "Enter is product dangerous? (y/n): ";
 		System.out.print(prompt);
 		input = stdin.readLine();
-		if (prompt.equals("y"))
+		if (input.equals("y"))
 		    isDangerous = true;
-		else if (prompt.equals("n"))
+		else if (input.equals("n"))
 		    isDangerous = false;
 
 		newLoad = new ProductLoad(produceName, produceWeight, produceValue, isDangerous);
@@ -91,7 +91,6 @@ public class TrainManager{
 	    }
 	    else if (input.equals("D")){ //REMOVE DANGEROUS CARS
 		train.removeDangerousCars();
-		System.out.println("\nDangerous cars successfully removed from the train.");
 	    }
 	    else if (input.equals("Q")){ //QUIT
 		prompt = "\nProgram terminating successfully...";

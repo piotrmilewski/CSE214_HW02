@@ -26,6 +26,8 @@ public class TrainLinkedList{
 
     public void setCursorData(TrainCar car){
 	cursor.getCurrNode().setLoad(car.getLoad());
+	if (car.getLoad().getDangerState())
+	    numOfDangerousCars++;
     }
 
     public void cursorForward(){
@@ -198,20 +200,24 @@ public class TrainLinkedList{
     }
 
     public void removeDangerousCars(){
-	if (numOfDangerousCars == 0)
+	if (numOfDangerousCars == 0){
+	    System.out.println("\nThere are no dangerous cars");
 	    return;
+	}
 	TrainCarNode innerCursor = head;
 	ProductLoad currLoad;
 	while (innerCursor != null && numOfDangerousCars > 0){
 	    currLoad = innerCursor.getCurrNode().getLoad();
-	    if (currLoad.getDangerState()){
+	    if (currLoad != null && currLoad.getDangerState()){
 		if (innerCursor.getNextNode() != null)
 		    innerCursor.getNextNode().setPrevNode(innerCursor.getPrevNode());
 		innerCursor = innerCursor.getPrevNode();
 		innerCursor.setNextNode(innerCursor.getNextNode().getNextNode());
 		numOfDangerousCars--;
 	    }
+	    innerCursor = innerCursor.getNextNode();
 	}
+	System.out.println("\nDangerous cars successfully removed from the train.");
     }
     
     public String toString(){
